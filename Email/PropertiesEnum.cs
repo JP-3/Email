@@ -1,4 +1,4 @@
-﻿namespace FileMover
+﻿namespace Emails
 {
     internal enum PropertiesEnum
     {
