@@ -1,4 +1,4 @@
-﻿namespace Emails
+﻿namespace MyEmails
 {
     internal enum PropertiesEnum
     {
