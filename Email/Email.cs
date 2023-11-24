@@ -5,6 +5,8 @@ namespace MyEmails
 {
     public class Email
     {
+        public void SendEmail(string subject) => SendEmail(subject, string.Empty);
+
         public void SendEmail(string subject, string body)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
