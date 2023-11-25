@@ -3,6 +3,7 @@
     internal enum PropertiesEnum
     {
         gName,
-        gKey
+        gKey,
+        SmtpClient
     }
 }
