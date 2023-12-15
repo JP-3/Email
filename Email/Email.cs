@@ -7,7 +7,9 @@ namespace MyEmails
     {
         public void SendEmail(string subject) => SendEmail(subject, string.Empty);
 
-        public void SendEmail(string subject, string body)
+        public void SendEmail(string subject, string body) => SendEmail(subject, string.Empty, string.Empty);
+
+        public void SendEmail(string subject, string body, string attachmentPath)
         {
             Dictionary<string, string> data = new Dictionary<string, string>();
             foreach (var row in File.ReadAllLines(@"C:\\git\key.txt"))
@@ -19,6 +21,12 @@ namespace MyEmails
             MailMessage mailMessage = new MailMessage(data[PropertiesEnum.gName.ToString()], data[PropertiesEnum.gName.ToString()]);
             mailMessage.Subject = subject;
             mailMessage.Body = body;
+
+            if (attachmentPath != string.Empty)
+            {
+                mailMessage.Attachments.Add(new Attachment(attachmentPath));
+            }
+            
 
             // Create a SmtpClient object
             SmtpClient smtpClient = new SmtpClient(data[PropertiesEnum.SmtpClient.ToString()]);
