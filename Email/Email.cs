@@ -7,7 +7,7 @@ namespace MyEmails
     {
         public void SendEmail(string subject) => SendEmail(subject, string.Empty);
 
-        public void SendEmail(string subject, string body) => SendEmail(subject, string.Empty, string.Empty);
+        public void SendEmail(string subject, string body) => SendEmail(subject, body, string.Empty);
 
         public void SendEmail(string subject, string body, string attachmentPath)
         {
