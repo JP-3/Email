@@ -19,21 +19,27 @@ namespace MyEmails
 
             // Create a MailMessage object
             MailMessage mailMessage = new MailMessage(data[PropertiesEnum.gName.ToString()], data[PropertiesEnum.gName.ToString()]);
-            mailMessage.Subject = subject;
-            mailMessage.Body = body;
-
-            if (attachmentPath != string.Empty)
+            using (mailMessage)
             {
-                mailMessage.Attachments.Add(new Attachment(attachmentPath));
-            }
-            
+                mailMessage.Subject = subject;
+                mailMessage.Body = body;
 
-            // Create a SmtpClient object
-            SmtpClient smtpClient = new SmtpClient(data[PropertiesEnum.SmtpClient.ToString()]);
-            smtpClient.Port = 587; 
-            smtpClient.Credentials = new NetworkCredential(data[PropertiesEnum.gName.ToString()], data[PropertiesEnum.gKey.ToString()]);
-            smtpClient.EnableSsl = true; // Enable SSL/TLS
-            smtpClient.Send(mailMessage);
+                if (attachmentPath != string.Empty)
+                {
+                    mailMessage.Attachments.Add(new Attachment(attachmentPath));
+                }
+
+                // Create a SmtpClient object
+                SmtpClient smtpClient = new SmtpClient(data[PropertiesEnum.SmtpClient.ToString()]);
+
+                using (new SmtpClient(data[PropertiesEnum.SmtpClient.ToString()]))
+                {
+                    smtpClient.Port = 587;
+                    smtpClient.Credentials = new NetworkCredential(data[PropertiesEnum.gName.ToString()], data[PropertiesEnum.gKey.ToString()]);
+                    smtpClient.EnableSsl = true; // Enable SSL/TLS
+                    smtpClient.Send(mailMessage);
+                }
+            }
         }
     }
 }
